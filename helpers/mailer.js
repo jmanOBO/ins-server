@@ -3,19 +3,19 @@ const nodemailer=require("nodemailer");
 const sendmail=(message)=>{
 
     const transporter=nodemailer.createTransport({
-        host: "moverswayinternational.com",
+        host: process.env.HOST,
         port: 465,
         secure: true,
         debug: true,
         auth:{
-          user: "ins@moverswayinternational.com",
-          pass: "Mantle123$"
+          user: process.env.HOST_EMAIL,
+          pass: process.env.HOST_PASSWORD
       
         }
       });
       
       const mailoptions={
-          from:"ins@moverswayinternational.com",
+          from:process.env.HOST_EMAIL,
           to: process.env.EMAIL,
           subject: "New Message",
           text: message
